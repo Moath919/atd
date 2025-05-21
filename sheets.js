@@ -1,5 +1,5 @@
 // Google Apps Script Web App URL
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwrRdRCGzXuijm4ZDese9-zWiD_ymAxQq90-ytGjaGkPDfswW8VRHPFQ7XjC3bCle626A/exec';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyKNpFmmcBt4I9DTCj6FLNlCk0u6f7TK4y-eJbLjVXxetbnt4fpt-wuXE0Bm48iSabqxA/exec';
 
 // Function to load data from Google Sheets
 async function loadDataFromSheets() {
