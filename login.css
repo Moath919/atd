@@ -1,0 +1,157 @@
+:root {
+    --primary-color: #2196F3;
+    --error-color: #dc3545;
+    --text-color: #333;
+    --background-color: #f5f5f5;
+    --border-color: #ddd;
+    --hover-color: #1976D2;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--background-color);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    direction: rtl;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+}
+
+.login-box {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 24px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.2s;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.password-group {
+    position: relative;
+}
+
+.password-input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+#togglePassword {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #666;
+    transition: color 0.2s;
+}
+
+#togglePassword:hover {
+    color: var(--primary-color);
+}
+
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.login-btn:hover {
+    background-color: var(--hover-color);
+}
+
+.login-btn i {
+    font-size: 18px;
+}
+
+.error-message {
+    color: var(--error-color);
+    margin-bottom: 15px;
+    text-align: center;
+    display: none;
+    padding: 10px;
+    background-color: rgba(220, 53, 69, 0.1);
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Placeholder styles */
+input::placeholder {
+    color: #999;
+}
+
+/* Focus styles */
+input:focus::placeholder {
+    color: #666;
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        padding: 10px;
+    }
+    
+    .login-box {
+        padding: 20px;
+    }
+    
+    input, .login-btn {
+        padding: 10px;
+    }
+    
+    h1 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+} 

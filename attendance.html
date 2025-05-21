@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="نظام متابعة حضور الطلاب">
+    <meta name="theme-color" content="#2196F3">
+    <title>متابعة الحضور</title>
+    <link rel="stylesheet" href="abs.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <!-- Authentication Check -->
+    <script>
+        // Check if user is logged in
+        if (!sessionStorage.getItem('isLoggedIn')) {
+            window.location.href = 'login.html';
+        }
+    </script>
+
+    <!-- User Info -->
+    <div class="user-info">
+        <span id="userDisplay"></span>
+        <button id="logoutBtn" class="logout-btn">تسجيل الخروج</button>
+    </div>
+
+    <!-- Rest of your existing HTML code -->
+    <!-- Absence Summary Modal -->
+    <div id="absenceSummaryModal" class="modal" role="dialog" aria-labelledby="modalTitle">
+        <!-- ... existing modal content ... -->
+    </div>
+
+    <!-- Absence Record Sidebar -->
+    <div id="absenceRecordMenu" class="absence-record-menu" role="complementary" aria-label="سجل الغياب">
+        <!-- ... existing sidebar content ... -->
+    </div>
+
+    <div class="container">
+        <!-- ... rest of your existing content ... -->
+    </div>
+
+    <script src="abs.js"></script>
+</body>
+</html> 

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="نظام متابعة حضور الطلاب">
+    <meta name="theme-color" content="#2196F3">
+    <title>متابعة الحضور</title>
+    <link rel="stylesheet" href="abs.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <!-- Authentication Check -->
+    <script>
+        // Check if user is logged in
+        if (!sessionStorage.getItem('isLoggedIn')) {
+            window.location.href = 'login.html';
+        }
+    </script>
+
+    <!-- User Info -->
+    <div class="user-info">
+        <span id="userDisplay"></span>
+    </div>
+
+    <!-- Absence Summary Modal -->
+    <div id="absenceSummaryModal" class="modal" role="dialog" aria-labelledby="modalTitle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">ملخص الغياب</h2>
+                <button class="close-modal-btn" aria-label="إغلاق">&times;</button>
+            </div>
+            <div class="modal-body">
+                <textarea id="summaryText" readonly aria-label="نص ملخص الغياب"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- Absence Record Sidebar -->
+    <div id="absenceRecordMenu" class="absence-record-menu" role="complementary" aria-label="سجل الغياب">
+        <div class="record-header">
+            <button class="close-btn" aria-label="إغلاق">×</button>
+            <h2 id="studentNameTitle"></h2>
+        </div>
+        <div class="record-content">
+            <h3>سجل الغياب</h3>
+            <div id="absenceList" class="absence-list">
+                <!-- Absence records will be added here dynamically -->
+            </div>
+            <div class="total-absences">
+                <span>مجموع الغياب:</span>
+                <span id="totalAbsenceCount" class="absence-count" role="status"></span>
+            </div>
+            <div class="total-tardies">
+                <span>مجموع التأخير:</span>
+                <span id="totalTardyCount" class="tardy-count" role="status"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Groups Section -->
+        <aside class="groups-section" role="complementary">
+            <h2>المجموعات</h2>
+            <button id="addGroupBtn" class="add-btn">
+                <i class="fas fa-plus" aria-hidden="true"></i>
+                <span>إضافة مجموعة</span>
+            </button>
+            <div id="groupsList" class="groups-list" role="list">
+                <!-- Groups will be added here dynamically -->
+            </div>
+        </aside>
+
+        <!-- Attendance Section -->
+        <main class="attendance-section" role="main">
+            <div class="header">
+                <h1 id="selectedGroupTitle">متابعة الحضور</h1>
+                <div class="date-selector">
+                    <label for="attendanceDate">اختر التاريخ:</label>
+                    <input type="date" id="attendanceDate" name="attendanceDate">
+                </div>
+                <button id="addStudentBtn" class="add-btn">
+                    <i class="fas fa-plus" aria-hidden="true"></i>
+                    <span>إضافة طالب</span>
+                </button>
+            </div>
+
+            <div class="table-wrapper">
+                <table id="attendanceTable" role="grid">
+                    <thead>
+                        <tr>
+                            <th scope="col">اسم الطالب</th>
+                            <th scope="col">الحصة الأولى</th>
+                            <th scope="col">الحصة الثانية</th>
+                            <th scope="col">مجموع الغياب</th>
+                            <th scope="col">مجموع التأخير</th>
+                            <th scope="col">الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendanceTableBody">
+                        <!-- Attendance records will be added here dynamically -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Absence Summary Controls -->
+            <section class="absence-summary-section">
+                <h3>ملخص الغياب</h3>
+                <div class="absence-summary-controls">
+                    <div class="summary-date">
+                        <label for="summaryDate">اختر التاريخ:</label>
+                        <input type="date" id="summaryDate" name="summaryDate">
+                    </div>
+                    <div class="summary-buttons">
+                        <button id="copyMessageBtn" class="summary-btn">
+                            <i class="fas fa-copy" aria-hidden="true"></i>
+                            <span>نسخ الرسالة</span>
+                        </button>
+                        <button id="sendMessageBtn" class="summary-btn">
+                            <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                            <span>إرسال الرسالة</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script type="module" src="abs.js"></script>
+</body>
+</html>

@@ -1,0 +1,1225 @@
+/* Base styles */
+:root {
+    --primary-color: #2196F3;
+    --absent-color: #ff4444;
+    --present-color: #00C851;
+    --tardy-color: #ffbb33;
+    --border-color: #ddd;
+    --background-color: #f5f5f5;
+    --text-dark: #333;
+    --text-light: #fff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: var(--background-color);
+    direction: rtl;
+    padding: clamp(0.5rem, 2vw, 1rem);
+    font-size: clamp(14px, 2vw, 16px);
+    color: var(--text-dark);
+}
+
+/* Container styles */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: clamp(0.5rem, 2vw, 1rem);
+    display: flex;
+    flex-direction: row;
+    gap: clamp(0.5rem, 2vw, 1rem);
+    margin-top: 60px;
+}
+
+/* Table styles with improved scrolling */
+.attendance-table {
+    flex: 1;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.table-wrapper {
+    min-width: 100%;
+    overflow-x: auto;
+    padding: 0.5rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: max-content; /* Ensures table doesn't shrink below content width */
+}
+
+th, td {
+    padding: clamp(0.5rem, 1.5vw, 0.75rem);
+    text-align: right;
+    border: 1px solid var(--border-color);
+    white-space: nowrap;
+}
+
+th {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Button container styles */
+.button-container {
+    display: flex;
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+}
+
+/* Button styles with improved contrast */
+button {
+    padding: clamp(0.5rem, 2vw, 0.75rem);
+    border: none;
+    border-radius: 4px;
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    cursor: pointer;
+    font-size: inherit;
+    min-height: 44px;
+    transition: background-color 0.2s;
+}
+
+.status-btn {
+    min-width: clamp(60px, 15vw, 100px);
+}
+
+.delete-btn {
+    background-color: #dc3545;
+}
+
+/* Groups panel */
+.groups-panel {
+    width: clamp(250px, 30%, 300px);
+    background: white;
+    padding: clamp(0.75rem, 2vw, 1rem);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Enhanced Mobile Styles */
+@media screen and (max-width: 600px) {
+    body {
+    padding: 0.5rem;
+    }
+
+    .container {
+        flex-direction: column;
+        padding: 0.25rem;
+    }
+
+    .groups-panel {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .button-container {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    button {
+        width: 100%;
+        margin: 0;
+        padding: 0.5rem;
+    }
+
+    th, td {
+        padding: 0.5rem;
+        font-size: 0.875rem;
+    }
+
+    .status-btn {
+        min-width: 100%;
+    }
+
+    /* Improve table scrolling indication */
+    .attendance-table::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 20px;
+        background: linear-gradient(to left, rgba(0,0,0,0.1), transparent);
+        pointer-events: none;
+    }
+    }
+
+/* Landscape Mode Optimizations */
+@media screen and (max-height: 480px) and (orientation: landscape) {
+    .container {
+        flex-direction: row;
+    }
+
+    .groups-panel {
+        width: 30%;
+        max-width: 250px;
+    }
+
+    .button-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    button {
+        width: auto;
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) {
+    button, 
+    .status-btn,
+    .delete-btn,
+    input[type="date"],
+    select {
+        min-height: 44px;
+        touch-action: manipulation;
+    }
+
+    /* Remove hover states */
+    button:hover {
+        opacity: 1;
+    }
+
+    /* Add active states */
+    button:active {
+        opacity: 0.8;
+    }
+}
+
+/* Status indicators */
+    .status-indicator {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.status-indicator:hover {
+    transform: scale(1.1);
+}
+
+.present { background-color: var(--present-color); }
+.absent { background-color: var(--absent-color); }
+.tardy { background-color: var(--tardy-color); }
+
+/* Message controls */
+.message-controls {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+.message-box {
+    width: 100%;
+    min-height: 100px;
+    margin: 1rem 0;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000;
+    }
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+}
+
+/* Additional mobile optimizations */
+@media screen and (max-width: 480px) {
+    body {
+        padding: 0.25rem;
+        font-size: 13px;
+    }
+
+    .container {
+        gap: 0.5rem;
+    }
+
+    th, td {
+        padding: 6px 4px;
+        font-size: 13px;
+    }
+
+    .status-btn {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+
+    .delete-btn {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+
+    /* Adjust modal for small screens */
+    .modal-content {
+        width: 95%;
+        margin: 5% auto;
+        padding: 15px;
+    }
+
+    .message-box {
+        min-height: 80px;
+    }
+}
+
+/* Absence Record Menu Styles */
+.absence-record-menu {
+    position: fixed;
+    top: 0;
+    right: 100%;
+    width: 300px;
+    height: 100vh;
+    background: white;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.absence-record-menu.active {
+    transform: translateX(100%);
+}
+
+.record-header {
+    padding: 20px;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #dc3545;
+}
+
+.record-content {
+    padding: 20px;
+}
+
+.absence-list {
+    margin-top: 20px;
+}
+
+.absence-record {
+    padding: 10px;
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 10px;
+}
+
+.absence-date {
+    font-weight: bold;
+    color: #dc3545;
+    margin-bottom: 5px;
+}
+
+.absence-details {
+    color: #6c757d;
+    font-size: 0.9em;
+}
+
+.total-absences {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #dee2e6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.absence-count {
+    font-weight: bold;
+    color: #dc3545;
+}
+
+/* Groups Section Styles */
+.groups-section {
+    width: 250px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.groups-list {
+    margin-top: 20px;
+}
+
+.group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.group-item:hover {
+    background-color: #e9ecef;
+}
+
+.group-item.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.group-item .delete-btn {
+    padding: 2px 6px;
+    font-size: 12px;
+    min-height: 24px;
+    min-width: 24px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    width: auto;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+}
+
+.group-item .delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* Update status button colors for better contrast */
+.status-btn.present {
+    background-color: var(--present-color);
+    color: black;
+}
+
+.status-btn.absent {
+    background-color: var(--absent-color);
+    color: white;
+}
+
+.status-btn.tardy {
+    background-color: var(--tardy-color);
+    color: black;
+}
+
+/* Update dropdown status colors for better contrast */
+.status-option.present {
+    color: black;
+    background-color: var(--present-color);
+}
+
+.status-option.absent {
+    color: white;
+    background-color: var(--absent-color);
+}
+
+.status-option.tardy {
+    color: black;
+    background-color: var(--tardy-color);
+}
+
+/* Update status dropdown button colors */
+.status-dropdown-btn.present {
+    background-color: var(--present-color);
+    color: black;
+}
+
+.status-dropdown-btn.absent {
+    background-color: var(--absent-color);
+    color: white;
+}
+
+.status-dropdown-btn.tardy {
+    background-color: var(--tardy-color);
+    color: black;
+}
+
+/* Attendance Section Styles */
+.attendance-section {
+    flex: 1;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.date-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Make student name clickable */
+td.student-name {
+    cursor: pointer;
+    color: #007bff;
+}
+
+td.student-name:hover {
+    text-decoration: underline;
+}
+
+/* Button Styles */
+.add-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.add-btn:hover {
+    background-color: #218838;
+}
+
+/* Attendance Status Buttons */
+.status-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0 2px;
+}
+
+.present {
+    background-color: #28a745;
+    color: white;
+}
+
+.absent {
+    background-color: #dc3545;
+    color: white;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* Input Styles */
+input[type="date"] {
+    padding: 6px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+/* Enhanced Responsive Design */
+@media (max-width: 1200px) {
+    .container {
+        gap: 15px;
+        padding: 15px;
+    }
+    
+    .groups-section {
+        width: 220px;
+    }
+}
+
+@media (max-width: 992px) {
+    .header {
+        gap: 15px;
+    }
+    
+    .status-btn {
+        padding: 4px 8px;
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    
+    .groups-section {
+        width: 100%;
+    }
+    
+    .header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .absence-record-menu {
+        width: 100%;
+    }
+
+    .absence-summary-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .summary-buttons {
+        flex-direction: column;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+
+    .container {
+        padding: 5px;
+        margin-top: 10px;
+    }
+
+    .groups-section, .attendance-section {
+        padding: 10px;
+    }
+
+    .add-btn {
+        padding: 6px 12px;
+        font-size: 0.9em;
+    }
+
+    .status-btn {
+        padding: 4px;
+        font-size: 0.8em;
+    }
+
+    .modal-content {
+        padding: 15px;
+    }
+
+    #summaryText {
+        height: 150px;
+    }
+
+    .absence-record-menu {
+        padding: 10px;
+    }
+}
+
+/* Laptop Optimizations */
+@media (min-width: 1201px) {
+    .container {
+        max-width: 1400px;
+        margin: 60px auto 0;
+    }
+
+    .groups-section {
+        width: 280px;
+    }
+
+    .attendance-section {
+        padding: 30px;
+    }
+
+    table {
+        margin-top: 30px;
+    }
+
+    th, td {
+        padding: 15px;
+    }
+
+    .status-btn {
+        padding: 8px 16px;
+        margin: 0 3px;
+    }
+
+    .modal-content {
+        max-width: 800px;
+    }
+
+    #summaryText {
+        height: 250px;
+    }
+}
+
+/* Fix for RTL in mobile view */
+@media (max-width: 768px) {
+    table td:first-child {
+        right: 0;
+        left: auto;
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) {
+    .status-btn, .add-btn, .delete-btn {
+        padding: 12px;
+    }
+
+    input[type="date"] {
+        padding: 8px 12px;
+        height: 40px;
+    }
+}
+
+/* Absence Summary Section */
+.absence-summary-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #dee2e6;
+}
+
+.absence-summary-section h3 {
+    margin-bottom: 15px;
+    color: #495057;
+}
+
+.absence-summary-controls {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.summary-date {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.summary-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.summary-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    color: white;
+    transition: background-color 0.2s;
+}
+
+.summary-btn i {
+    font-size: 16px;
+}
+
+#copyMessageBtn {
+    background-color: #6c757d;
+}
+
+#copyMessageBtn:hover {
+    background-color: #5a6268;
+}
+
+#sendMessageBtn {
+    background-color: #007bff;
+}
+
+#sendMessageBtn:hover {
+    background-color: #0056b3;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+}
+
+.modal.active {
+    display: block;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.close-modal-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #dc3545;
+}
+
+#summaryText {
+    width: 100%;
+    height: 200px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    resize: none;
+    font-family: inherit;
+    direction: rtl;
+}
+
+.total-tardies {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #6c757d;
+}
+
+.tardy-count {
+    font-weight: bold;
+    color: #ffc107;
+}
+
+.tardy {
+    background-color: #ffc107;
+    color: white;
+}
+
+/* Add to existing styles */
+.status-btn.tardy {
+    background-color: #ffc107;
+    color: white;
+}
+
+.status-btn.tardy:hover {
+    background-color: #e0a800;
+}
+
+/* Touch-specific optimizations */
+@media (hover: none) {
+    .status-btn,
+    .delete-btn {
+        min-height: 36px;
+    }
+
+    /* Add momentum scrolling for smoother touch experience */
+    .attendance-table {
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
+
+    /* Add visual feedback for touch */
+    .status-btn:active,
+    .delete-btn:active {
+        opacity: 0.8;
+    }
+}
+
+/* Mobile Table Styles */
+@media screen and (max-width: 768px) {
+    .attendance-section {
+        padding: 8px;
+        margin: 0;
+    }
+
+    .attendance-table {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    th {
+        background-color: #2196F3;
+        color: white;
+        padding: 10px 5px;
+        font-size: 14px;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    td {
+        padding: 8px 5px;
+        text-align: center;
+        font-size: 14px;
+        background: white;
+    }
+
+    /* Column specific widths */
+    th:nth-child(1), td:nth-child(1) { /* Student name */
+        min-width: 100px;
+        max-width: 120px;
+    }
+
+    th:nth-child(2), td:nth-child(2), /* First period */
+    th:nth-child(3), td:nth-child(3) { /* Second period */
+        min-width: 90px;
+    }
+
+    th:nth-child(4), td:nth-child(4), /* Total absences */
+    th:nth-child(5), td:nth-child(5) { /* Total tardies */
+        min-width: 70px;
+    }
+
+    th:nth-child(6), td:nth-child(6) { /* Actions */
+        min-width: 60px;
+    }
+
+    /* Status buttons */
+    .status-btn {
+        padding: 6px;
+        margin: 2px;
+        font-size: 12px;
+        width: auto;
+        min-height: 32px;
+        border-radius: 4px;
+    }
+
+    /* Delete button */
+    .delete-btn {
+        padding: 4px 8px;
+        font-size: 12px;
+        min-width: 50px;
+        min-height: 32px;
+    }
+
+    /* Container adjustments */
+    .container {
+        padding: 0;
+        margin: 0;
+    }
+
+    /* Header adjustments */
+    .header {
+        padding: 8px;
+        margin-bottom: 10px;
+    }
+
+    #attendanceDate {
+        padding: 6px;
+        width: auto;
+    }
+
+    /* Add horizontal scroll indicator */
+    .attendance-section::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 50px;
+        height: 100%;
+        background: linear-gradient(to right, transparent, rgba(0,0,0,0.1));
+        pointer-events: none;
+    }
+}
+
+/* Smaller mobile devices */
+@media screen and (max-width: 480px) {
+    th, td {
+        font-size: 13px;
+        padding: 6px 4px;
+    }
+
+    .status-btn {
+        padding: 4px;
+        font-size: 11px;
+        min-height: 28px;
+    }
+
+    .delete-btn {
+        padding: 4px 6px;
+        font-size: 11px;
+        min-height: 28px;
+    }
+
+    /* Adjust header elements */
+    .header h1 {
+        font-size: 18px;
+        margin-bottom: 8px;
+    }
+
+    .date-selector {
+        font-size: 13px;
+    }
+
+    #attendanceDate {
+        font-size: 13px;
+        padding: 4px;
+    }
+}
+
+/* Attendance Status Dropdown */
+.status-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.status-dropdown-btn {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    min-width: 90px;
+    text-align: center;
+}
+
+.status-options {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 120px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    border-radius: 4px;
+    z-index: 20;
+    top: 100%;
+    right: 0;
+}
+
+.status-options.active {
+    display: block;
+}
+
+.status-option {
+    padding: 8px 12px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: right;
+    transition: background-color 0.2s;
+    color: white;  /* Default text color */
+}
+
+.status-option:hover {
+    background-color: #f5f5f5;
+    color: #333;  /* Dark text on hover */
+}
+
+.status-option.present {
+    background-color: var(--present-color);
+    color: white;
+}
+
+.status-option.absent {
+    background-color: var(--absent-color);
+    color: white;
+}
+
+.status-option.tardy {
+    background-color: var(--tardy-color);
+    color: white;
+}
+
+/* Show status indicator dot */
+.status-dropdown-btn::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-left: 6px;
+    background-color: #ccc;
+}
+
+.status-dropdown-btn.present::before {
+    background-color: var(--present-color);
+}
+
+.status-dropdown-btn.absent::before {
+    background-color: var(--absent-color);
+}
+
+.status-dropdown-btn.tardy::before {
+    background-color: var(--tardy-color);
+}
+
+/* Hide original status buttons on mobile */
+@media screen and (max-width: 768px) {
+    .status-btn {
+        display: none;
+    }
+    
+    .status-dropdown {
+        display: inline-block;
+    }
+}
+
+/* Show original buttons on desktop */
+@media screen and (min-width: 769px) {
+    .status-dropdown {
+        display: none;
+    }
+}
+
+/* User Info styles */
+.user-info {
+    background: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.user-profile {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.user-profile:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    color: var(--primary-color);
+}
+
+.user-avatar circle,
+.user-avatar path {
+    stroke: currentColor;
+    transition: color 0.2s;
+}
+
+.user-profile:hover .user-avatar {
+    color: var(--hover-color, #1976D2);
+}
+
+.user-name {
+    font-weight: bold;
+    color: var(--text-dark);
+    margin-left: 8px;
+}
+
+.fa-chevron-down {
+    font-size: 12px;
+    color: #666;
+    transition: transform 0.2s;
+    margin-right: 4px;
+}
+
+.user-profile.active .fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+.profile-menu {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    min-width: 180px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease-in-out;
+}
+
+.user-profile.active .profile-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.menu-item {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-dark);
+    transition: background-color 0.2s;
+}
+
+.menu-item:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
+.menu-item.logout {
+    color: var(--absent-color);
+}
+
+.menu-item.logout:hover {
+    background-color: rgba(220, 53, 69, 0.1);
+}
+
+.menu-item i {
+    font-size: 16px;
+}
+
+/* Add margin to container to account for fixed header */
+.container {
+    margin-top: 60px;
+}
