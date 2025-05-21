@@ -1,18 +1,14 @@
 // Google Apps Script Web App URL
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyKNpFmmcBt4I9DTCj6FLNlCk0u6f7TK4y-eJbLjVXxetbnt4fpt-wuXE0Bm48iSabqxA/exec';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxKH6s8bzDsP-_eVUDfS0_i6HtigVHBsFt5xcShrL67HBm3IPSJlMcnGX2c0SbjTP-jxw/exec';
 
 // Function to load data from Google Sheets
 async function loadDataFromSheets() {
     try {
         const url = new URL(WEB_APP_URL);
         url.searchParams.append('action', 'getData');
-        
+
         const response = await fetch(url.toString(), {
-            method: 'GET',
-            mode: 'cors',
-            headers: {
-                'Accept': 'application/json'
-            }
+            method: 'GET'
         });
         
         if (!response.ok) {
@@ -40,18 +36,13 @@ async function loadDataFromSheets() {
 async function saveDataToSheets(data) {
     try {
         const values = convertDataToSheetFormat(data);
-        
+        const formData = new FormData();
+        formData.append('action', 'saveData');
+        formData.append('values', JSON.stringify(values));
+
         const response = await fetch(WEB_APP_URL, {
             method: 'POST',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                action: 'saveData',
-                values: values
-            })
+            body: formData
         });
 
         if (!response.ok) {
